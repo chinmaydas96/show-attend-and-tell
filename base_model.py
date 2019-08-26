@@ -264,7 +264,7 @@ class BaseModel(object):
                                      str(global_step)+".npy")
 
         print("Loading the model from %s..." %save_path)
-        data_dict = np.load(save_path, encoding='latin1').item()
+        data_dict = np.load(save_path, encoding='latin1',allow_pickle=True).item()
         count = 0
         for v in tqdm(tf.global_variables()):
             if v.name in data_dict.keys():
@@ -278,7 +278,7 @@ class BaseModel(object):
         # import pdb; pdb.set_trace()
         import os;
         data_path = data_path.strip()
-        data_dict = np.load(os.getcwd() + '/' + data_path, encoding='latin1').item()
+        data_dict = np.load(os.getcwd() + '/' + data_path, encoding='latin1',allow_pickle=True).item()
         count = 0
         for op_name in tqdm(data_dict):
             with tf.variable_scope(op_name, reuse = True):
